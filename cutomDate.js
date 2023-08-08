@@ -87,7 +87,9 @@ class CustomDate {
 
 
     // return boolean
-    isFuture() { }
+    isFuture() { 
+        return this.date > this.now 
+    }
 
 
     // Return (bigger, smaller or equal) between the given date and this.date
@@ -141,4 +143,6 @@ class CustomDate {
 
 let dateClass = new CustomDate()
 
-console.log(dateClass.shortDay());
+// dateClass.addDays(4)
+
+console.log(dateClass.isFuture());
