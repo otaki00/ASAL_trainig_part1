@@ -1,5 +1,5 @@
 // import fetch library to fetch the data from API
-const fetch = require('node-fetch');
+// const fetch = require('node-fetch');
 
 
 
