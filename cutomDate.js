@@ -116,7 +116,7 @@ class CustomDate {
 
     // Returns the quarter (1 to 4) of the year for the given date, else use this.date
     getQuarter(newDate=this.date) {
-        console.log(Math.ceil((this.now.getMonth() / 3)) );
+        console.log(`we are in quart (${Math.ceil((this.now.getMonth() / 3))})` );
     }
 
 
@@ -145,4 +145,4 @@ let dateClass = new CustomDate()
 
 // dateClass.addDays(4)
 
-console.log(dateClass.isFuture());
+console.log(dateClass.getQuarter());
