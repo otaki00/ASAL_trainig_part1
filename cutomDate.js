@@ -104,16 +104,28 @@ class CustomDate {
 
     // Returns the quarter (1 to 4) of the year for the given date, else use this.date
     getQuarter(newDate) {
-        console.log(this.date.getMonth());
+        console.log(Math.ceil((10 / 3)) );
     }
 
 
     // Returns current day (three letters, Mon through Sun) for the given date, else use this.date
-    shortDay(newDate) { }
+    shortDay(newDate) { 
+        let mapDay = {
+            1: "Sat",
+            2: "Sun",
+            3: "Mon",
+            4: "Tus",
+            5: "Wed",
+            6: "Thu",
+            7: "Fri"
+        }
+
+        return mapDay[newDate.getDay() + 1]
+    }
 
 }
 
 
 let dateClass = new CustomDate()
 
-console.log(dateClass.getQuarter());
+console.log(dateClass.shortDay(new Date()));
