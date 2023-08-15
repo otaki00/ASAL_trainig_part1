@@ -1,22 +1,25 @@
 // import fetch library to fetch the data from API
-// const fetch = require('node-fetch');
+const fetch = require('node-fetch');
 
 
-
-
-// arraow function to fetch for currency
-const getCountries = async () => {
-    const response = await fetch("https://gist.githubusercontent.com/tiagodealmeida/0b97ccf117252d742dddf098bc6cc58a/raw/f621703926fc13be4f618fb4a058d0454177cceb/countries.json")
+const callApi = async (url) => {
+    const response = await fetch(url)
     const jsonRes = await response.json()
     return jsonRes
 }
 
 
+// arraow function to fetch for currency
+const getCountries = async () => {
+    const url = "https://gist.githubusercontent.com/tiagodealmeida/0b97ccf117252d742dddf098bc6cc58a/raw/f621703926fc13be4f618fb4a058d0454177cceb/countries.json"
+    return await callApi(url)
+}
+
+
 // arraow function to fetch for country
 const getCurrency = async () => {
-    const response = await fetch("https://gist.githubusercontent.com/ksafranski/2973986/raw/5fda5e87189b066e11c1bf80bbfbecb556cf2cc1/Common-Currency.json")
-    const jsonRes = await response.json()
-    return jsonRes
+    const url = "https://gist.githubusercontent.com/ksafranski/2973986/raw/5fda5e87189b066e11c1bf80bbfbecb556cf2cc1/Common-Currency.json"
+    return await callApi(url)
 }
 
 let currency;
@@ -27,7 +30,7 @@ let countries;
     countries = await getCountries()
 
 
-    // console.log(searhCurrencyByCode('USD'));
+    console.log(searchCurrency(null ,"US Dollar"));
     // console.log(searhCurrencyByName('Euro'))
     // printCurrencyFormally()
     // searchCountryByName("United Arab Emirates")
@@ -36,23 +39,18 @@ let countries;
     // let numOfCurr = Object.keys(currency).length
     // console.log(numOfCurr);
 
-    console.log(returnCurrencyWithoutDblicatManually().length);
+    // console.log(returnCurrencyWithoutDblicatManually().length);
 
 })()
 
 
-const searhCurrencyByCode = (code) => {
-    return currency[code]
-}
-
-const searhCurrencyByName = (name) => {
-    for (let code in currency) {
-        if (currency[code].name.toLowerCase() == name.toLowerCase()) {
-            return currency[code]
-        }
+const searchCurrency = (code , name = null) => {
+    
+    if(code && name) {
+        return { name: currency[code]['name'], code: currency[code]['code'] }
+    } else {
+        return { code: currency[code] }
     }
-
-    return null
 }
 
 
@@ -94,6 +92,7 @@ const returnCurrencyWithoutDblicatSet = () => {
         currencySet.add(currency[code])
     }
 
+    
     return currencySet
 }
 
@@ -101,7 +100,7 @@ const returnCurrencyWithoutDblicatSet = () => {
 const returnCurrencyWithoutDblicatManually = () => {
     let currencyArr = []
     for (let code in currency) {
-        if (!currencyArr.includes(currency[code])) {
+        if (!currencyArr[code]) {
             currencyArr.push(currency[code])
         }
     }
